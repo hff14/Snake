@@ -23,11 +23,11 @@ void Open_title()
 	cout<<"         一蛇蛇蛇一　　　　　　　　一蛇　　　　　　　　蛇蛇蛇蛇蛇蛇蛇吃　一蛇蛇　　　蛇一一蛇蛇蛇蛇蛇一　　"<<endl;
 	cout<<endl<<endl<<endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout<<setw(65)<<"键盘方向键控制方向"<<endl<<endl;
+	cout<<setw(65)<<"键盘方向键与WASD键控制方向"<<endl<<endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
 	cout<<setw(64)<<"Designed by Jack"<<endl<<endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout<<setw(70)<<"输入Y进行游戏，输入N退出游戏"<<endl<<endl;
+	cout<<setw(70)<<"同时按住右方向键进行游戏，同时按住左方向键退出游戏"<<endl<<endl;
 }
 void Over_title()
 {
@@ -50,8 +50,6 @@ void Over_title()
 	cout<<endl<<endl<<endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 	cout<<setw(60)<<"GAME OVER"<<endl<<endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout<<setw(61)<<"你的得分为："<<(snake.length-2)*10<<endl<<endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout<<setw(70)<<"输入Y重新游戏，输入N退出游戏"<<endl<<endl;
+	cout<<setw(70)<<"同时按住右方向键进行游戏，同时按住左方向键退出游戏"<<endl<<endl;
 }

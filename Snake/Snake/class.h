@@ -10,6 +10,7 @@
 #define Point_width     20
 #define Point_height	20
 #define Number_Snake	2		//蛇的数量
+#define Interval_Snake  10*Point_height		//蛇体之间相距10个纵轴方向
 using namespace std;
 
 class Point
@@ -74,29 +75,38 @@ public:
 	Node* head;
 	Node* tail;
 	int length;
-	void Create();
+	void Create(int);
 	void Grow(Node);
 	Node Anti_grow();
 };
 
 void Snake::Create(int NoSnake)
 {
-	Node* part1=new Node;
+	Node* part1=new Node;								//注意：实际上我们在控制“尾”的前进方向
 	Node* part2=new Node;
 	part1->x=wall.Left_bond+Point_width;
-	part1->y=wall.Up_bond+2*NoSnake*Point_height;		//蛇体之间相距2个纵轴方向
+	part1->y=wall.Up_bond+NoSnake*Interval_Snake;		//蛇体之间相距2个纵轴方向
 	part1->next=NULL;
 	tail=part1;
 	part2->x=wall.Left_bond;
-	part2->y=wall.Up_bond+2*NoSnake*Point_height;
+	part2->y=wall.Up_bond+NoSnake*Interval_Snake;
 	part2->next=tail;
 	head=part2;
 	length=2;
-	switch(NoSnake)
+	
+	/*
+	if(NoSnake==0)										//增添蛇体则需要增设颜色区别
+		setfillstyle(SOLID_FILL,GREEN);	
+	if(NoSnake==1)
+		setfillstyle(SOLID_FILL,CYAN);
+	*/
+	
+	switch(NoSnake)										//增添蛇体则需要增设颜色区别
 	{
-		case 0:setfillstyle(SOLID_FILL,GREEN);			//增添蛇体则需要增设颜色区别
-		case 1:setfillstyle(SOLID_FILL,CYAN);
+		case 0:setfillstyle(SOLID_FILL,GREEN);break;
+		case 1:setfillstyle(SOLID_FILL,CYAN);break;
 	}
+	
 	bar(head->x+1,head->y+1,head->x+Point_width-1,head->y+Point_width-1);
 	bar(tail->x+1,tail->y+1,tail->x+Point_width-1,tail->y+Point_width-1);
 }
