@@ -21,7 +21,8 @@ void CloseGraph()											//¹Ø±ÕÍ¼ĞÎÄ£Ê½
 	closegraph();
 }
 
-int GetDirections(int NoSnake)								//¼ì²â·½Ïòº¯Êı ÔÙ¼ÓÉßÔòĞèÒª·ÖÅä¼üÎ»
+//¼ì²â·½Ïòº¯Êı ÔÙ¼ÓÉßÔòĞèÒª·ÖÅä¼üÎ»
+int GetDirections(int NoSnake)
 {
 	if(NoSnake==0)
 	{
@@ -55,7 +56,9 @@ int GetDirections(int NoSnake)								//¼ì²â·½Ïòº¯Êı ÔÙ¼ÓÉßÔòĞèÒª·ÖÅä¼üÎ»
 
 //´Ë´¦ĞèÒª¸ù¾İNumber_SnakeÌØÊâÓÅ»¯
 int fla[Number_Snake]={0};
-int Death(int x[Number_Snake], int y[Number_Snake], int fla[Number_Snake])			//ÅĞ¶ÏÉßÊÇ·ñËÀÍö£¨Åö±Ú»òÕßÅöÉíÌå£©µÄº¯Êı
+
+//ÅĞ¶ÏÉßÊÇ·ñËÀÍö£¨Åö±Ú»òÕßÅöÉíÌå£©µÄº¯Êı
+int Death(int x[Number_Snake], int y[Number_Snake], int fla[Number_Snake])
 {
 	int sum=0;
 	int lastfla[Number_Snake];
@@ -142,7 +145,8 @@ int Death(int x[Number_Snake], int y[Number_Snake], int fla[Number_Snake])			//Å
 }
 
 //Ôö¼ÓÉßÊıÄ¿ĞèÒªÔö¼ÓifÓï¾äÌõ¼ş
-bool Choose_open()											//ÅĞ¶ÏÊäÈëyÓënµÄº¯Êı£¬ÎªÅĞ¶Ï¿ªÊ¼º¯ÊıËùÓÃ¡£
+//ÅĞ¶ÏÊäÈëyÓënµÄº¯Êı£¬ÎªÅĞ¶Ï¿ªÊ¼º¯ÊıËùÓÃ¡£
+bool Choose_open()
 {
 	while(1)
 	{
@@ -153,7 +157,8 @@ bool Choose_open()											//ÅĞ¶ÏÊäÈëyÓënµÄº¯Êı£¬ÎªÅĞ¶Ï¿ªÊ¼º¯ÊıËùÓÃ¡£
 	}
 }
 
-bool Choose_again()											//GAME OVERºóÔÙÑ¡Ôñº¯Êı£¬Ê¹ÓÃChoose_open()¡£
+//GAME OVERºóÔÙÑ¡Ôñº¯Êı£¬Ê¹ÓÃChoose_open()¡£
+bool Choose_again()
 {
 	CloseGraph();
 	system("CLS");
@@ -177,7 +182,8 @@ bool Game()
 	bool temp2=false;
 	int randx,randy;
 	
-	for(int i=0;i<Number_Snake;i++)								//Ê×´Î´´½¨ÉßÌå
+	//Ê×´Î´´½¨ÉßÌå
+	for(int i=0;i<Number_Snake;i++)
 	{
 		snake[i].Create(i);
 		fla[i]=0;
@@ -195,18 +201,22 @@ bool Game()
 		{
 			if(key[i]!=0)											
 			{
-				if(key[i]==1)
-					if(Snake_of_direction[i]!=(Direction)down)
-						Snake_of_direction[i]=(Direction)up;
-				if(key[i]==2)
-					if(Snake_of_direction[i]!=(Direction)up)
-						Snake_of_direction[i]=(Direction)down;
-				if(key[i]==3)
-					if(Snake_of_direction[i]!=(Direction)righ)
-						Snake_of_direction[i]=(Direction)lef;
-				if(key[i]==4)
-					if(Snake_of_direction[i]!=(Direction)lef)
-						Snake_of_direction[i]=(Direction)righ;
+				switch(key[i])
+				{
+				case 1: if(Snake_of_direction[i]!=(Direction)down)
+							Snake_of_direction[i]=(Direction)up;
+					break;
+				case 2: if(Snake_of_direction[i]!=(Direction)up)
+							Snake_of_direction[i]=(Direction)down;
+					break;
+				case 3: if(Snake_of_direction[i]!=(Direction)righ)
+							Snake_of_direction[i]=(Direction)lef;
+					break;
+				case 4: if(Snake_of_direction[i]!=(Direction)lef)
+							Snake_of_direction[i]=(Direction)righ;
+					break;
+				default:break;
+				}
 			}
 		}
 		
@@ -240,12 +250,14 @@ bool Game()
 		if(temp1==true)
 		{
 			srand(time(NULL));
-			do												//ÒÔÏÂÑ­»·²úÉúÊ³Îïµã£¬ÒªÇóºÏ·¨£¨²»Éú³ÉÓÚÉßÉíÉÏ£©¡£
+			
+			//ÒÔÏÂÑ­»·²úÉúÊ³Îïµã£¬ÒªÇóºÏ·¨£¨²»Éú³ÉÓÚÉßÉíÉÏ£©
+			do
 			{
 				temp2=false;
 				randx=wall.Left_bond+rand()%Column_of_Wall*Point_width;	
-				//randy=wall.Up_bond+rand()%Row_of_Wall*Point_height;
-				randy=40;
+				randy=wall.Up_bond+rand()%Row_of_Wall*Point_height;
+				//randy=40;
 				for(int m=0;m<Number_Snake;m++)
 					for(Node* p=snake[m].head;p!=NULL;p=p->next)
 						if((randx==p->x)&&(randy==p->y))
@@ -255,7 +267,9 @@ bool Game()
 			random_node.x=randx;
 			random_node.y=randy;
 			random_node.next=NULL;
-			setfillstyle(SOLID_FILL,BLUE);					//Ê³ÎïÓÃÀ¶É«É«¿é±ê³ö
+			
+			//Ê³ÎïÓÃÀ¶É«É«¿é±ê³ö
+			setfillstyle(SOLID_FILL,BLUE);
 			bar(random_node.x+1,random_node.y+1,random_node.x+Point_width-1,random_node.y+Point_height-1);
 			temp1=false;
 		}
@@ -265,14 +279,15 @@ bool Game()
 		{
 			headx[i]=snake[i].tail->x;
 			heady[i]=snake[i].tail->y;
-			if(Snake_of_direction[i]==up)								//ÓÉÒÔÉÏ»ñµÃµÄÉßµÄĞĞ½ø·½Ïò£¬µ¼³öÉßÍ·²¿µÄÏÂÒ»×ø±ê
-				heady[i]=heady[i]-Point_height;
-			if(Snake_of_direction[i]==down)
-				heady[i]=heady[i]+Point_height;
-			if(Snake_of_direction[i]==lef)
-				headx[i]=headx[i]-Point_width;
-			if(Snake_of_direction[i]==righ)
-				headx[i]=headx[i]+Point_width;
+			
+			//ÓÉÒÔÉÏ»ñµÃµÄÉßµÄĞĞ½ø·½Ïò£¬µ¼³öÉßÍ·²¿µÄÏÂÒ»×ø±ê
+			switch(Snake_of_direction[i])
+			{
+			case (Direction)up: heady[i]=heady[i]-Point_height;break;
+			case (Direction)down: heady[i]=heady[i]+Point_height;break;
+			case (Direction)lef: headx[i]=headx[i]-Point_width;break;
+			case (Direction)righ: headx[i]=headx[i]+Point_width;break;
+			}
 		}
 		
 		int sum=0;
@@ -283,47 +298,58 @@ bool Game()
 			for(int m=0;m<Number_Snake;m++)
 			{
 				if(fla[m]==1) continue;
-				if(headx[m]==random_node.x&&heady[m]==random_node.y)	//ÅĞ¶ÏÊÇ·ñ³ÔµôÊ³Îï£¬¼´ÅĞ¶Ï£¨ĞÂ£©Í·²¿ÊÇ·ñÔÚÊ³ÎïÉÏ£¬ÈôÊÇ£¬ÔòÔö¼ÓÍ·ÉÏµÄÒ»½Ú¡£
+				
+				//ÅĞ¶ÏÊÇ·ñ³ÔµôÊ³Îï£¬¼´ÅĞ¶Ï£¨ĞÂ£©Í·²¿ÊÇ·ñÔÚÊ³ÎïÉÏ£¬ÈôÊÇ£¬ÔòÔö¼ÓÍ·ÉÏµÄÒ»½Ú¡£
+				if(headx[m]==random_node.x&&heady[m]==random_node.y)
 				{
 					snake[m].Grow(random_node);
 					
-					if(m==0)										//ÔöÌíÉßÌåÔòĞèÒªÔöÉèÑÕÉ«Çø±ğ
-						setfillstyle(SOLID_FILL,GREEN);	
-					if(m==1)
-						setfillstyle(SOLID_FILL,CYAN);
+					//ÔöÌíÉßÌåÔòĞèÒªÔöÉèÑÕÉ«Çø±ğ
+					switch(m)
+					{
+						case 0:setfillstyle(SOLID_FILL,GREEN);break;
+						case 1:setfillstyle(SOLID_FILL,CYAN);break;
+					}
 					
 					bar(random_node.x+1,random_node.y+1,random_node.x-1+Point_width,random_node.y-1+Point_height);
 					temp1=true;
 				}
-				else											//Èô²»ÊÇ£¬ÔòÍ·ÒÆ¶¯Ò»²½£¬Î²ÒÆ¶¯Ò»²½£¬¼´Éú³¤ºóÉ¾½Ú¡£
+				
+				//Èô²»ÊÇ£¬ÔòÍ·ÒÆ¶¯Ò»²½£¬Î²ÒÆ¶¯Ò»²½£¬¼´Éú³¤ºóÉ¾½Ú¡£
+				else
 				{
 					new_node.x=headx[m];new_node.y=heady[m];new_node.next=NULL;
 					snake[m].Grow(new_node);
 					old_node=snake[m].Anti_grow();
 					
-					if(m==0)										//ÔöÌíÉßÌåÔòĞèÒªÔöÉèÑÕÉ«Çø±ğ
-						setfillstyle(SOLID_FILL,GREEN);	
-					if(m==1)
-						setfillstyle(SOLID_FILL,CYAN);
+					//ÔöÌíÉßÌåÔòĞèÒªÔöÉèÑÕÉ«Çø±ğ
+					switch(m)
+					{
+						case 0:setfillstyle(SOLID_FILL,GREEN);break;
+						case 1:setfillstyle(SOLID_FILL,CYAN);break;
+					}
 					
 					bar(new_node.x+1,new_node.y+1,new_node.x-1+Point_width,new_node.y-1+Point_height);
 					setfillstyle(SOLID_FILL,BLACK);
 					bar(old_node.x+1,old_node.y+1,old_node.x-1+Point_width,old_node.y-1+Point_height);
 				}
 			}
-		
-			wall.build_Wall();								//ÔÙ´Î¹¹½¨Î§Ç½£¬±£Ö¤Î§Ç½Ô­×´£¬·ñÔò»á³öÏÖ¾â³İ×´¡£
+			
+			//ÔÙ´Î¹¹½¨Î§Ç½£¬±£Ö¤Î§Ç½Ô­×´£¬·ñÔò»á³öÏÖ¾â³İ×´¡£
+			wall.build_Wall();
 		}
 		else
 			return Choose_again();
 		
-		Sleep(Speed_snake);									//¿ØÖÆ´Ë¶ÎÑ­»·µÄÔËĞĞËÙ¶È¡£
+		//¿ØÖÆ´Ë¶ÎÑ­»·µÄÔËĞĞËÙ¶È¡£
+		Sleep(Speed_snake);	
 	}
 }
 
 int main()
 {
 	Open_title();
+	
 	if(!Choose_open())										//¿ª¾ÖÑ¡Ôñ¿ª¹Ø
 		return 0;
 	else

@@ -94,13 +94,6 @@ void Snake::Create(int NoSnake)
 	head=part2;
 	length=2;
 	
-	/*
-	if(NoSnake==0)										//增添蛇体则需要增设颜色区别
-		setfillstyle(SOLID_FILL,GREEN);	
-	if(NoSnake==1)
-		setfillstyle(SOLID_FILL,CYAN);
-	*/
-	
 	switch(NoSnake)										//增添蛇体则需要增设颜色区别
 	{
 		case 0:setfillstyle(SOLID_FILL,GREEN);break;
