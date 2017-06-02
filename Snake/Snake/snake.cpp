@@ -60,7 +60,7 @@ int fla[Number_Snake]={0};
 //判断蛇是否死亡（碰壁或者碰身体）的函数
 int Death(int x[Number_Snake], int y[Number_Snake], int fla[Number_Snake])
 {
-	int sum=0;
+	int sum=0; 
 	int lastfla[Number_Snake];
 	for(int m=0;m<Number_Snake;m++)
 	{
@@ -243,6 +243,7 @@ bool Game()
 				{
 					snake[m].Create(m);
 					fla[m]=0;
+					Snake_of_direction[m]=righ;
 				}
 			}
 		}
@@ -330,6 +331,8 @@ bool Game()
 					}
 					
 					bar(new_node.x+1,new_node.y+1,new_node.x-1+Point_width,new_node.y-1+Point_height);
+					
+					//to do:事实上将旧块涂黑之前应判断和新块是否重合，如果重合就不涂黑
 					setfillstyle(SOLID_FILL,BLACK);
 					bar(old_node.x+1,old_node.y+1,old_node.x-1+Point_width,old_node.y-1+Point_height);
 				}
