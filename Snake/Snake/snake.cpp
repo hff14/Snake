@@ -157,7 +157,7 @@ bool Choose_open()
 	}
 }
 
-//GAME OVER后再选择函数，使用Choose_open()。
+//GAME OVER后再选择函数，使用Choose_open()
 bool Choose_again()
 {
 	CloseGraph();
